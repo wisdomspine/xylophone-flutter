@@ -28,32 +28,37 @@ class XylophoneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
-          child: ListView.separated(
-            itemBuilder: (BuildContext context, int key) => Container(
-              alignment: Alignment.centerLeft,
-              child: SizedBox(
-                child: FlatButton(
-                  color: _colors[key],
-                  onPressed: () {
-                    _players[key].play(
-                      "note${key + 1}.wav",
-                      mode: PlayerMode.MEDIA_PLAYER,
-                    );
-                  },
-                  child: null,
-                ),
-                width: 100,
-                height: 50,
-              ),
-            ),
-            separatorBuilder: (BuildContext context, int key) => SizedBox(
-              height: 10.0,
-            ),
-            itemCount: _colors.length,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _colors
+                .asMap()
+                .map(
+                  (key, value) => MapEntry(
+                    key,
+                    Expanded(
+                      child: FlatButton(
+                        color: _colors[key],
+                        onPressed: () {
+                          playNote(key + 1);
+                        },
+                      ),
+                    ),
+                  ),
+                )
+                .values
+                .toList(),
           ),
         ),
       ),
+    );
+  }
+
+  void playNote(int noteNumber) {
+    _players[noteNumber].play(
+      "note$noteNumber.wav",
+      mode: PlayerMode.MEDIA_PLAYER,
     );
   }
 }
