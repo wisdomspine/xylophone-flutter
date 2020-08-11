@@ -57,32 +57,34 @@ class _AnimalCardState extends State<AnimalCard> {
                 child: Text(
                   animal.name.toUpperCase(),
                   style: GoogleFonts.indieFlower(
-                    textStyle: Theme.of(context).textTheme.headline2,
-                  ),
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: "Sound: ",
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          fontWeight: FontWeight.bold,
+                Flexible(
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Sound: ",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      children: [
+                        TextSpan(
+                          text: animal.sound,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                    children: [
-                      TextSpan(
-                        text: animal.sound,
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
                 ),
                 _isPlaying
                     ? RaisedButton(
